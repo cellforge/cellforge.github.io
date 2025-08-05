@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"></html></html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,23 +11,27 @@
     <style>
         body {
             font-family: 'Roboto', sans-serif;
-            color: #334155; /* slate-700 */
+            color: #1e293b;
+            background: #fff;
         }
         .font-heading {
             font-family: 'IBM Plex Sans', sans-serif;
         }
         .hero-gradient {
-            background: linear-gradient(45deg, #f0f9ff, #e0f2fe);
+            background-image: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80');
+            background-size: cover;
+            background-position: center;
         }
         .section-title {
-            font-size: 2.5rem; /* 40px */
+            font-size: 2.5rem;
             font-weight: 700;
             line-height: 1.2;
+            color: #1e293b;
         }
         .section-subtitle {
-            font-size: 1.25rem; /* 20px */
+            font-size: 1.25rem;
             font-weight: 400;
-            color: #475569; /* slate-600 */
+            color: #2563eb;
         }
         .card-hover-effect {
             transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -36,6 +40,45 @@
             transform: translateY(-5px);
             box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.07), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
         }
+        /* Restore Tailwind backgrounds for sections */
+        section,
+        .bg-white,
+        .bg-slate-50 {
+            background: inherit !important;
+        }
+        /* Restore text colors for headings and paragraphs */
+        h1, h2, h3, h4, h5, h6, p, a, label, span, .text-slate-900, .text-slate-600, .text-slate-700, .text-slate-400, .text-blue-600 {
+            color: inherit !important;
+        }
+        /* Card backgrounds */
+        .bg-slate-50,
+        .bg-white {
+            background: inherit !important;
+        }
+        /* Input and textarea fields */
+        input, textarea {
+            background: #fff !important;
+            color: #1e293b !important;
+            border-color: #cbd5e1 !important;
+        }
+        input:focus, textarea:focus {
+            border-color: #2563eb !important;
+            background: #fff !important;
+            color: #1e293b !important;
+        }
+        /* Button styles */
+        .bg-blue-600 {
+            background: #2563eb !important;
+            color: #fff !important;
+        }
+        .hover\:bg-blue-700:hover {
+            background: #1e40af !important;
+        }
+        /* Footer */
+        footer {
+            background: #1e293b !important;
+            color: #fff !important;
+        }
     </style>
 </head>
 <body class="bg-white">
@@ -43,7 +86,7 @@
     <!-- Header -->
     <header class="bg-white/90 backdrop-blur-lg sticky top-0 z-50 border-b border-slate-200">
         <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="#" class="text-3xl font-bold text-blue-600 font-heading">CellForge</a>
+            <a href="#" class="text-3xl font-bold font-heading" style="color: #2563eb;">CellForge</a>
             <div class="hidden md:flex space-x-8 items-center">
                 <a href="#problem" class="text-slate-600 hover:text-blue-600 transition font-medium">The Problem</a>
                 <a href="#solution" class="text-slate-600 hover:text-blue-600 transition font-medium">Our Solution</a>
@@ -66,62 +109,72 @@
     </header>
 
     <!-- Hero Section -->
-    <section class="hero-gradient">
-        <div class="container mx-auto px-6 py-24 md:py-32 flex flex-col md:flex-row items-center">
-            <div class="md:w-1/2 text-center md:text-left">
-                <h1 class="section-title text-slate-900 mb-4 font-heading">Biomanufacturing, Reimagined.</h1>
-                <p class="section-subtitle mb-8 max-w-xl">Programming Microbes into Scalable Bio-Factories for Agile, Affordable, and Animal-Free Cytokines & Growth Factors.</p>
-                <a href="#solution" class="bg-blue-600 text-white font-bold py-3 px-8 rounded-lg hover:bg-blue-700 transition text-lg shadow-lg hover:shadow-xl">Discover Our Solution</a>
+    <section class="hero-gradient relative flex items-center justify-center min-h-[500px] md:min-h-[600px] bg-black">
+        <div class="absolute inset-0 bg-black opacity-90"></div>
+        <div class="relative z-10 flex flex-col items-center justify-center w-full h-full text-white px-4">
+            <div class="flex flex-col items-center justify-center mb-8">
+                <span class="font-heading font-extrabold text-6xl md:text-8xl text-blue-600 text-center">CellForge</span>
             </div>
-            <div class="md:w-1/2 mt-12 md:mt-0">
-                <img src="https://placehold.co/600x400/bfdbfe/1e3a8a?text=Modern+Lab+Equipment" alt="Biomanufacturing" class="rounded-xl shadow-2xl w-full">
+            <div class="w-full flex items-center justify-center mb-2">
+                <span class="text-xl md:text-2xl font-normal text-center bg-white text-black px-4 py-2 rounded-lg w-full justify-center flex">Making 100% Animal-Free, Endotoxin free</span>
             </div>
+            <div class="w-full flex items-center justify-center mb-8" style="height: 60px;">
+                <span id="protein-anim" class="font-heading text-2xl md:text-4xl font-normal text-blue-600 text-center"></span>
+            </div>
+            
         </div>
+        <style>
+            #protein-anim {
+                display: inline-block;
+                min-width: 320px;
+                white-space: nowrap;
+                overflow: hidden;
+                position: relative;
+            }
+            .protein-slide-in {
+                animation: proteinIn 0.7s cubic-bezier(.4,0,.2,1) forwards;
+            }
+            .protein-slide-out {
+                animation: proteinOut 0.7s cubic-bezier(.4,0,.2,1) forwards;
+            }
+            @keyframes proteinIn {
+                from { opacity: 0; transform: translateX(-80px);}
+                to   { opacity: 1; transform: translateX(0);}
+            }
+            @keyframes proteinOut {
+                from { opacity: 1; transform: translateX(0);}
+                to   { opacity: 0; transform: translateX(80px);}
+            }
+        </style>
+        <script>
+            const proteins = [
+                "Cytokines",
+                "Growth Factors",
+                "Antibodies",
+                "Membrane Proteins",
+                "Antigens",
+                "Difficult to Make Proteins"
+            ];
+            const animEl = document.getElementById('protein-anim');
+            let idx = 0;
+            function showProtein(i) {
+                animEl.textContent = proteins[i];
+                animEl.classList.remove('protein-slide-out');
+                animEl.classList.add('protein-slide-in');
+                setTimeout(() => {
+                    animEl.classList.remove('protein-slide-in');
+                    animEl.classList.add('protein-slide-out');
+                    setTimeout(() => {
+                        idx = (i + 1) % proteins.length;
+                        showProtein(idx);
+                    }, 700);
+                }, 1400);
+            }
+            showProtein(idx);
+        </script>
     </section>
-
-    <!-- Problem Section -->
-    <section id="problem" class="py-20 bg-slate-50">
-        <div class="container mx-auto px-6">
-            <div class="text-center mb-16">
-                <h2 class="section-title text-slate-900 font-heading">The Challenge with Modern Biomanufacturing</h2>
-                <p class="section-subtitle mt-4 max-w-3xl mx-auto">The cytokine industry relies on outdated, expensive, and inefficient technology, creating significant bottlenecks.</p>
-            </div>
-            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-                <!-- Card 1: Long Lead Times -->
-                <div class="bg-white p-8 rounded-xl border border-slate-200 card-hover-effect">
-                    <div class="bg-blue-100 text-blue-600 rounded-full w-16 h-16 flex items-center justify-center mb-6">
-                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                    </div>
-                    <h3 class="text-xl font-bold mb-2 text-slate-900 font-heading">Long Lead Times</h3>
-                    <p class="text-slate-600">Reliance on imports leads to an average delay of 6 weeks, hindering research and production.</p>
-                </div>
-                <!-- Card 2: High Costs -->
-                <div class="bg-white p-8 rounded-xl border border-slate-200 card-hover-effect">
-                    <div class="bg-blue-100 text-blue-600 rounded-full w-16 h-16 flex items-center justify-center mb-6">
-                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v.01"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9.5a4.5 4.5 0 11-9 0 4.5 4.5 0 019 0z"></path></svg>
-                    </div>
-                    <h3 class="text-xl font-bold mb-2 text-slate-900 font-heading">High CapEx & OpEx</h3>
-                    <p class="text-slate-600">Specialized bioreactors and hefty licensing fees create a high barrier to entry and operation.</p>
-                </div>
-                <!-- Card 3: High Selling Price -->
-                <div class="bg-white p-8 rounded-xl border border-slate-200 card-hover-effect">
-                    <div class="bg-blue-100 text-blue-600 rounded-full w-16 h-16 flex items-center justify-center mb-6">
-                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path></svg>
-                    </div>
-                    <h3 class="text-xl font-bold mb-2 text-slate-900 font-heading">Inflated Prices</h3>
-                    <p class="text-slate-600">Costs of ₹0.5-2 Lakhs per milligram make essential proteins inaccessible.</p>
-                </div>
-                <!-- Card 4: Contamination Risk -->
-                <div class="bg-white p-8 rounded-xl border border-slate-200 card-hover-effect">
-                    <div class="bg-blue-100 text-blue-600 rounded-full w-16 h-16 flex items-center justify-center mb-6">
-                         <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
-                    </div>
-                    <h3 class="text-xl font-bold mb-2 text-slate-900 font-heading">Contamination Risk</h3>
-                    <p class="text-slate-600">Animal and endotoxin components pose a significant risk to product quality and safety.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+   
+    
 
     <!-- Solution Section -->
     <section id="solution" class="py-20 bg-white">
@@ -167,98 +220,187 @@
         </div>
     </section>
 
-    <!-- Technology Section -->
-    <section id="technology" class="py-20 bg-slate-50">
+    <!-- Technology Highlights Section -->
+    <section class="py-20 bg-white">
         <div class="container mx-auto px-6">
             <div class="text-center mb-16">
-                <h2 class="section-title text-slate-900 font-heading">Our Technology: TetraForge™</h2>
-                <p class="section-subtitle mt-4 max-w-3xl mx-auto">A programmed ciliate precision fermentation platform that is Safe, Smart, and Scalable.</p>
+                <h2 class="section-title text-slate-900 font-heading">Our Technology: TetraForge™
+                <div class="text-center mb-2">
+                    <span class="block text-lg text-slate-600 font-normal mt-4">Programmed Ciliate + Precision Fermentation</span>
+                </div>
+</h2>
+        <div class="flex flex-col md:flex-row justify-center items-stretch gap-8">
+            <!-- Safe -->
+            <div class="flex flex-col items-center w-full md:w-1/3">
+                <div class="font-heading text-2xl font-bold text-blue-600 mb-4">Safe</div>
+                <div class="w-full bg-white rounded-xl flex items-center justify-center h-32 mb-4">
+                    <img src="images/shield.png" alt="Safe" class="h-20 w-20 object-contain" />
+                </div>
+                <div class="text-slate-700 text-center text-lg">Non-pathogenic fresh water Microbe</div>
             </div>
-            <div class="grid md:grid-cols-2 gap-16 items-center">
-                <div>
-                     <div class="bg-white p-4 rounded-xl shadow-xl border">
-                        <img src="https://placehold.co/600x400/1e40af/dbeafe?text=Green+Fluorescent+Protein+Expression" alt="Proof of Concept" class="rounded-lg w-full">
-                        <p class="text-center mt-4 font-semibold text-slate-700">Proof of Concept: Green Fluorescent Protein expression.</p>
+            <!-- Smart -->
+            <div class="flex flex-col items-center w-full md:w-1/3">
+                <div class="font-heading text-2xl font-bold text-blue-600 mb-4">Smart</div>
+                <div class="w-full bg-white rounded-xl flex items-center justify-center h-32 mb-4">
+                    <img src="images/idea.png" alt="Smart" class="h-20 w-20 object-contain" />
+                </div>
+                <div class="text-slate-700 text-center text-lg">Secrete Proteins directly into media</div>
+            </div>
+            <!-- Scalable -->
+            <div class="flex flex-col items-center w-full md:w-1/3">
+                <div class="font-heading text-2xl font-bold text-blue-600 mb-4">Scalable</div>
+                <div class="w-full bg-white rounded-xl flex items-center justify-center h-32 mb-4">
+                    <img src="images/distillatory.png" alt="Scalable" class="h-20 w-20 object-contain" />
+                </div>
+                <div class="text-slate-700 text-center text-lg">Plug &amp; Play with market standard microbial fermenters</div>
+            </div>
+        </div>
+        </div>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+        </div>
+    </section>
+
+<!-- Sustainable Future Section -->
+<section class="relative h-[400px] md:h-[500px] flex items-center justify-center overflow-hidden" style="background: #000;">
+    <img src="images/green.png" alt="Nature Moving Background" class="absolute inset-0 w-full h-full object-cover z-0" style="opacity: 0.5;">
+    <div class="relative z-10 flex items-center justify-center w-full h-full">
+    <div class="text-center">
+        <h2 class="absolute top-28 left-1/2 transform -translate-x-1/2 text-5xl md:text-6xl font-heading font-extrabold text-white text-center drop-shadow-lg px-6 mb-0 w-full z-10">
+            "Sustainable Future with Precision Fermentation"
+        
+        </h2>
+        <div class="flex flex-row items-end justify-center gap-12 absolute bottom-6 left-1/2 -translate-x-1/2 z-20">
+            <!-- Goal 3: Good Health and Well-being -->
+            <img src="https://sdgs.un.org/sites/default/files/goals/E_SDG_Icons-03.jpg" alt="SDG 3" class="h-44 w-44 object-contain rounded-lg shadow-lg" />
+            <!-- Goal 8: Decent Work and Economic Growth -->
+            <img src="https://sdgs.un.org/sites/default/files/goals/E_SDG_Icons-08.jpg" alt="SDG 8" class="h-44 w-44 object-contain rounded-lg shadow-lg" />
+            <!-- Goal 9: Industry, Innovation and Infrastructure -->
+            <img src="https://sdgs.un.org/sites/default/files/goals/E_SDG_Icons-09.jpg" alt="SDG 9" class="h-44 w-44 object-contain rounded-lg shadow-lg" />
+            <!-- Goal 13: Climate Action -->
+            <img src="https://sdgs.un.org/sites/default/files/goals/E_SDG_Icons-13.jpg" alt="SDG 13" class="h-44 w-44 object-contain rounded-lg shadow-lg" />
+            <!-- Goal 17: Partnerships for the Goals -->
+            <img src="https://sdgs.un.org/sites/default/files/goals/E_SDG_Icons-17.jpg" alt="SDG 17" class="h-44 w-44 object-contain rounded-lg shadow-lg" />
+        </div>
+            
+        </div>
+        
+        </h2>
+    </div>
+</section>
+    <!-- Applications Section --> 
+    <section id="applications" class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="section-title text-slate-900 font-heading">Applications</h2>
+                <p class="section-subtitle mt-4 max-w-3xl mx-auto">One Platform. Versatile Applications. 
+                    Sustainable by Design.</p>
+            </div>
+           
+            <!-- First row: 3 cards in one line -->
+            <div class="flex flex-col md:flex-row justify-center items-stretch gap-10 mb-10">
+                <!-- Bio-pharma -->
+                <div class="bg-slate-50 rounded-xl shadow-lg p-0 text-center card-hover-effect flex flex-col items-center justify-center h-64 w-full md:w-1/3">
+                    <div class="flex flex-col items-center justify-center h-full w-full">
+                        <img src="images/biopharma.png" alt="Bio-pharma" class="mx-auto rounded-lg w-32 h-32 object-cover mb-2">
+                        <div class="flex items-center justify-center w-full">
+                            <span class="font-heading font-bold text-xl text-slate-900 bg-white rounded-lg px-2 py-1 mt-2 shadow-sm w-32 text-center">Bio-pharma</span>
+                        </div>
                     </div>
                 </div>
-                <div class="space-y-8">
-                    <div>
-                        <h3 class="text-2xl font-bold mb-2 text-blue-700 font-heading">Safe & Regulatory-Friendly</h3>
-                        <p class="text-slate-600">Utilizes a non-GMO, regulatory-safe host (Ciliates), which are non-pathogenic microbes found freely in nature.</p>
+                <!-- Diagnostics -->
+                <div class="bg-slate-50 rounded-xl shadow-lg p-0 text-center card-hover-effect flex flex-col items-center justify-center h-64 w-full md:w-1/3">
+                    <div class="flex flex-col items-center justify-center h-full w-full">
+                        <img src="images/diagnostic.png" alt="Diagnostics" class="mx-auto rounded-lg w-32 h-32 object-cover mb-2">
+                        <div class="flex items-center justify-center w-full">
+                            <span class="font-heading font-bold text-xl text-slate-900 bg-white rounded-lg px-2 py-1 mt-2 shadow-sm w-32 text-center">Diagnostics</span>
+                        </div>
                     </div>
-                    <div>
-                        <h3 class="text-2xl font-bold mb-2 text-blue-700 font-heading">Smart & Efficient</h3>
-                        <p class="text-slate-600">Our programmed microbe naturally secretes proteins, simplifying the purification process and lowering operational expenses.</p>
+                </div>
+                <!-- Cell Culture -->
+                <div class="bg-slate-50 rounded-xl shadow-lg p-0 text-center card-hover-effect flex flex-col items-center justify-center h-64 w-full md:w-1/3">
+                    <div class="flex flex-col items-center justify-center h-full w-full">
+                        <img src="images/cellculture.png" alt="Life-science Research" class="mx-auto rounded-lg w-32 h-32 object-cover mb-2">
+                        <div class="flex items-center justify-center w-full">
+                            <span class="font-heading font-bold text-xl text-slate-900 bg-white rounded-lg px-2 py-1 mt-2 shadow-sm w-32 text-center">Biotechnology Research</span>
+                        </div>
                     </div>
-                    <div>
-                        <h3 class="text-2xl font-bold mb-2 text-blue-700 font-heading">Scalable & Versatile</h3>
-                        <p class="text-slate-600">Compatible with all standard fermenters and uniquely capable of producing hard-to-make proteins.</p>
+                </div>
+               
+            </div>
+            <!-- Second row: 2 cards centered -->
+            <div class="flex flex-col md:flex-row justify-center items-stretch gap-10">
+                 <!-- Cosmetics -->
+                <div class="bg-slate-50 rounded-xl shadow-lg p-0 text-center card-hover-effect flex flex-col items-center justify-center h-64 w-full md:w-1/3">
+                    <div class="flex flex-col items-center justify-center h-full w-full">
+                        <img src="images/cosmetic.png" alt="Cosmetics" class="mx-auto rounded-lg w-32 h-32 object-cover mb-2">
+                        <div class="flex items-center justify-center w-full">
+                            <span class="font-heading font-bold text-xl text-slate-900 bg-white rounded-lg px-2 py-1 mt-2 shadow-sm w-32 text-center">Cosmetics</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Future Foods -->
+                <div class="bg-slate-50 rounded-xl shadow-lg p-0 text-center card-hover-effect flex flex-col items-center justify-center h-64 w-full md:w-1/3">
+                    <div class="flex flex-col items-center justify-center h-full w-full">
+                        <img src="images/Mock Meat.png" alt="Future Foods" class="mx-auto rounded-lg w-32 h-32 object-cover mb-2">
+                        <div class="flex items-center justify-center w-full">
+                            <span class="font-heading font-bold text-xl text-slate-900 bg-white rounded-lg px-2 py-1 mt-2 shadow-sm w-32 text-center">Future Foods</span>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-
-    <!-- Market Opportunity Section -->
-    <section id="market" class="py-20 bg-blue-600 text-white">
-        <div class="container mx-auto px-6 text-center">
-            <h2 class="section-title mb-12 font-heading">Gateway to a Multi-Billion Dollar Industry</h2>
-            <div class="grid md:grid-cols-3 gap-8">
-                <div class="bg-white/20 p-8 rounded-xl backdrop-blur-sm">
-                    <h3 class="text-5xl font-extrabold font-heading">$132B</h3>
-                    <p class="mt-2 text-xl font-semibold opacity-90">Recombinant Proteins Market</p>
-                </div>
-                <div class="bg-white/20 p-8 rounded-xl backdrop-blur-sm">
-                    <h3 class="text-5xl font-extrabold font-heading">$31.2B</h3>
-                    <p class="mt-2 text-xl font-semibold opacity-90">Cytokines & Growth Factors</p>
-                </div>
-                <div class="bg-white/20 p-8 rounded-xl backdrop-blur-sm">
-                    <h3 class="text-5xl font-extrabold font-heading">15.3%</h3>
-                    <p class="mt-2 text-xl font-semibold opacity-90">Compounded Annual Growth</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
+    
     <!-- Team Section -->
     <section id="team" class="py-20 bg-white">
-        <div class="container mx-auto px-6">
-            <div class="text-center mb-16">
-                <h2 class="section-title text-slate-900 font-heading">Our Team</h2>
-                <p class="section-subtitle mt-4 max-w-3xl mx-auto">Led by a team of experienced scientists, innovators, and business leaders.</p>
+        <div class="text-center mb-16">
+            <h2 class="section-title text-slate-900 font-heading">Our Team</h2>
+            <p class="section-subtitle mt-4 max-w-3xl mx-auto">Led by a team of experienced scientists, innovators, and business leaders.</p>
+        </div>
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-10">
+            <!-- Team Member 1 -->
+            <div class="text-center">
+                <img src="images/Akanksha2.jpg" alt="Akanksha Wakhare" class="w-48 h-48 mx-auto rounded-full shadow-lg mb-4 border border-black">
+                <div class="font-heading font-bold text-black text-xl mb-2">Akanksha Wakhare</div>
+                <div class="font-heading font-bold text-black mb-4">Co-founder & CEO</div>
+                <a href="https://www.linkedin.com/in/akanksha-wakhare/" target="_blank" rel="noopener noreferrer" class="inline-block">
+                    <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/linkedin.svg" alt="LinkedIn" class="w-6 h-6 mx-auto" style="filter: invert(0); fill: #2563eb;">
+                </a>
             </div>
-            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-10">
-                <!-- Team Member 1 -->
-                <div class="text-center group">
-                    <img src="https://placehold.co/400x400/dbeafe/1e40af?text=Akanksha+W." alt="Akanksha Wakhare" class="w-48 h-48 mx-auto rounded-full shadow-lg mb-4 border-4 border-transparent group-hover:border-blue-300 transition">
-                    <h4 class="text-xl font-bold text-slate-900 font-heading">Akanksha Wakhare</h4>
-                    <p class="text-blue-600 font-semibold">Co-founder & CEO</p>
-                    <p class="text-slate-600 mt-2 text-sm">Expert in funding, operations, commercialization, and strategy.</p>
-                </div>
-                <!-- Team Member 2 -->
-                <div class="text-center group">
-                    <img src="https://placehold.co/400x400/dbeafe/1e40af?text=Niraj+T." alt="Niraj Tadasare" class="w-48 h-48 mx-auto rounded-full shadow-lg mb-4 border-4 border-transparent group-hover:border-blue-300 transition">
-                    <h4 class="text-xl font-bold text-slate-900 font-heading">Niraj Tadasare</h4>
-                    <p class="text-blue-600 font-semibold">Co-founder & CTO</p>
-                    <p class="text-slate-600 mt-2 text-sm">5+ years experience with Ciliates, specializing in strain engineering.</p>
-                </div>
-                <!-- Team Member 3 -->
-                <div class="text-center group">
-                    <img src="https://placehold.co/400x400/dbeafe/1e40af?text=Dr.+Marcus+H." alt="Dr. Marcus Hartmann" class="w-48 h-48 mx-auto rounded-full shadow-lg mb-4 border-4 border-transparent group-hover:border-blue-300 transition">
-                    <h4 class="text-xl font-bold text-slate-900 font-heading">Dr. Marcus Hartmann</h4>
-                    <p class="text-blue-600 font-semibold">Scientific Advisor</p>
-                    <p class="text-slate-600 mt-2 text-sm">Founder of Cilian AG with 25+ years experience in Ciliate R&D.</p>
-                </div>
-                <!-- Team Member 4 -->
-                <div class="text-center group">
-                    <img src="https://placehold.co/400x400/dbeafe/1e40af?text=Lalith+K." alt="Lalith Kishore" class="w-48 h-48 mx-auto rounded-full shadow-lg mb-4 border-4 border-transparent group-hover:border-blue-300 transition">
-                    <h4 class="text-xl font-bold text-slate-900 font-heading">Lalith Kishore</h4>
-                    <p class="text-blue-600 font-semibold">Business Advisor</p>
-                    <p class="text-slate-600 mt-2 text-sm">Expert in diagnostics client networks and infrastructure.</p>
-                </div>
+            <!-- Team Member 2 -->
+            <div class="text-center">
+                <img src="images/Niraj.jpg" alt="Niraj Tadasare" class="w-48 h-48 mx-auto rounded-full shadow-lg mb-4 border border-black">
+                <div class="font-heading font-bold text-black text-xl mb-2">Niraj Tadsare</div>
+                <div class="font-heading font-bold text-black mb-4">Co-founder & CTO</div>
+                <a href="https://www.linkedin.com/in/niraj-tadasare/" target="_blank" rel="noopener noreferrer" class="inline-block">
+                    <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/linkedin.svg" alt="LinkedIn" class="w-6 h-6 mx-auto" style="filter: invert(0); fill: #2563eb;">
+                </a>
+            </div>
+            <!-- Team Member 3 -->
+            <div class="text-center">
+                <img src="images/Marcus-Hartmann.webp" alt="Dr. Marcus Hartmann" class="w-48 h-48 mx-auto rounded-full shadow-lg mb-4 border border-black">
+                <div class="font-heading font-bold text-black text-xl mb-2">Dr. Marcus Hartmann</div>
+                <div class="font-heading font-bold text-black mb-4">Scientific Advisor</div>
+                <a href="https://www.linkedin.com/in/marcus-hartmann-7b8b6a1/" target="_blank" rel="noopener noreferrer" class="inline-block">
+                    <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/linkedin.svg" alt="LinkedIn" class="w-6 h-6 mx-auto" style="filter: invert(0); fill: #2563eb;">
+                </a>
+            </div>
+            <!-- Team Member 4 -->
+            <div class="text-center">
+                <img src="images/Lalit.jpg" alt="Lalith Kishore" class="w-48 h-48 mx-auto rounded-full shadow-lg mb-4 border border-black">
+                <div class="font-heading font-bold text-black text-xl mb-2">Lalith Kishore</div>
+                <div class="font-heading font-bold text-black mb-4">Business Advisor</div>
+                <a href="https://www.linkedin.com/in/lalith-kishore/" target="_blank" rel="noopener noreferrer" class="inline-block">
+                    <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/linkedin.svg" alt="LinkedIn" class="w-6 h-6 mx-auto" style="filter: invert(0); fill: #2563eb;">
+                </a>
             </div>
         </div>
     </section>
+    
 
     <!-- Contact Section -->
     <section id="contact" class="py-20 bg-slate-50">
