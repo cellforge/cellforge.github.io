@@ -1,477 +1,1430 @@
 <!DOCTYPE html>
-<html lang="en"></html></html>
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CellForge - Biomanufacturing, Reimagined</title>
+    <title>Cell Forge - Sustainable. Animal Free. Recombinant Proteins</title>
+    
+    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts - Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        'cf-dark-blue': '#002266',
+                        'cf-mid-blue': '#27508e',
+                        'cf-light-blue': '#55b7e4',
+                        'cf-gray-purple': '#8786a6',
+                        'cf-white': '#ffffff',
+                    },
+                    // Animations are now defined in the <style> block
+                }
+            }
+        }
+    </script>
+    
+    <!-- Custom Styles for Hero Animation -->
     <style>
         body {
-            font-family: 'Roboto', sans-serif;
-            color: #1e293b;
-            background: #fff;
+            font-family: 'Inter', sans-serif;
+            background-color: #ffffff;
+            color: #1f2937; /* Default gray */
         }
-        .font-heading {
-            font-family: 'IBM Plex Sans', sans-serif;
+        
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
         }
-        .hero-gradient {
-            background-image: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80');
-            background-size: cover;
-            background-position: center;
+
+        /* Define keyframes here */
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
         }
-        .section-title {
-            font-size: 2.5rem;
+
+        @keyframes spin-reverse {
+            from { transform: rotate(360deg); }
+            to { transform: rotate(0deg); }
+        }
+
+        .hero-animation-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100%;
+            height: 100%;
+            min-width: 1200px; /* Ensure circles are large */
+            min-height: 1200px;
+            transform: translate(-50%, -50%);
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1;
+            opacity: 0.4;
+        }
+
+        .circle-arc {
+            position: absolute;
+            border-radius: 50%;
+            border-style: solid;
+            background: transparent;
+        }
+
+        /* Create 5 arcs with the specified color palette - adjusted for logo blending */
+        .arc-1 {
+            width: 70vh;
+            height: 70vh;
+            min-width: 600px;
+            min-height: 600px;
+            border-width: 50px;
+            border-color: #002266; /* cf-dark-blue */
+            border-top-color: transparent;
+            border-left-color: transparent;
+            animation: spin 15s linear infinite;
+        }
+
+        .arc-2 {
+            width: 85vh;
+            height: 85vh;
+            min-width: 750px;
+            min-height: 750px;
+            border-width: 50px;
+            border-color: #27508e; /* cf-mid-blue */
+            border-bottom-color: transparent;
+            border-right-color: transparent;
+            animation: spin-reverse 12s linear infinite;
+        }
+
+        .arc-3 {
+            width: 100vh;
+            height: 100vh;
+            min-width: 900px;
+            min-height: 900px;
+            border-width: 50px;
+            border-color: #55b7e4; /* cf-light-blue */
+            border-left-color: transparent;
+            border-right-color: transparent;
+            animation: spin 20s linear infinite;
+        }
+
+        .arc-4 {
+            width: 115vh;
+            height: 115vh;
+            min-width: 1050px;
+            min-height: 1050px;
+            border-width: 50px;
+            border-color: #8786a6; /* cf-gray-purple */
+            border-top-color: transparent;
+            border-bottom-color: transparent;
+            animation: spin-reverse 18s linear infinite;
+        }
+        
+        .arc-5 {
+            width: 130vh;
+            height: 130vh;
+            min-width: 1200px;
+            min-height: 1200px;
+            border-width: 50px;
+            border-color: #002266; /* cf-dark-blue */
+            border-top-color: transparent;
+            border-left-color: transparent;
+            animation: spin 25s linear infinite;
+        }
+
+        /* Ensure nav items are styled correctly */
+        .nav-link {
+            position: relative;
+            padding: 0.5rem 1rem;
+            font-size: 1rem;
+            font-weight: 500;
+            color: #4b5563;
+            border-radius: 0.375rem;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-link:hover {
+            color: #002266;
+            transform: translateY(-1px);
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: #55b7e4;
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+        
+        .nav-link:hover::after {
+            width: 80%;
+        }
+        
+        /* Mobile menu button animation */
+        .hamburger-line {
+            width: 1.5rem;
+            height: 0.125rem;
+            background-color: #374151;
+            border-radius: 9999px;
+            transition: all 0.3s ease;
+        }
+        #menu-btn.open .line-1 {
+            transform: translateY(6px) rotate(45deg);
+        }
+        #menu-btn.open .line-2 {
+            opacity: 0;
+        }
+        #menu-btn.open .line-3 {
+            transform: translateY(-6px) rotate(-45deg);
+        }
+
+        /* Animated Text Styling */
+        .highlight-box {
+            display: inline-block;
+            padding: 4px 12px;
+            border: 3px solid #55b7e4;
+            border-radius: 8px;
+            background-color: white;
+        }
+
+        .reagent-list {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            margin-top: 12px;
+            position: relative;
+            min-height: 40px;
+        }
+
+        .reagent-item {
+            position: absolute;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .reagent-item.active {
+            animation: fadeInOut 4s ease-in-out forwards;
+        }
+
+        @keyframes fadeInOut {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            15% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            85% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+        }
+
+        /* Vertical Carousel for Why TetraFORGE */
+        .feature-carousel {
+            position: relative;
+            height: 500px;
+            overflow: hidden;
+        }
+
+        .feature-track {
+            position: relative;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 24px;
+        }
+
+        .feature-card {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            padding: 28px 36px;
+            border-radius: 24px;
+            min-height: 110px;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            opacity: 0;
+            transform: translateY(30px) scale(0.9);
+            position: absolute;
+            right: 0;
+            width: 100%;
+            max-width: 440px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .feature-card.active {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+        }
+
+        .feature-card.prev {
+            opacity: 0.65;
+            transform: translateY(-130px) scale(0.88);
+        }
+
+        .feature-card.next {
+            opacity: 0.65;
+            transform: translateY(130px) scale(0.88);
+        }
+
+        .feature-card.far-prev {
+            opacity: 0.35;
+            transform: translateY(-260px) scale(0.78);
+        }
+
+        .feature-card.far-next {
+            opacity: 0.35;
+            transform: translateY(260px) scale(0.78);
+        }
+
+        .feature-card img {
+            width: 85px;
+            height: 85px;
+            border-radius: 50%;
+            object-fit: cover;
+            flex-shrink: 0;
+            border: 4px solid rgba(255,255,255,0.4);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .feature-card .text-content {
+            flex: 1;
+            color: white;
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
             font-weight: 700;
+            margin: 0;
             line-height: 1.2;
-            color: #1e293b;
         }
-        .section-subtitle {
-            font-size: 1.25rem;
-            font-weight: 400;
-            color: #2563eb;
+
+        .feature-card p {
+            font-size: 1.125rem;
+            margin: 4px 0 0 0;
+            opacity: 0.95;
         }
-        .card-hover-effect {
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+        /* Color variants */
+        .feature-card.color-green { background: linear-gradient(135deg, #002266 0%, #27508e 100%); }
+        .feature-card.color-purple { background: linear-gradient(135deg, #27508e 0%, #55b7e4 100%); }
+        .feature-card.color-blue { background: linear-gradient(135deg, #55b7e4 0%, #27508e 100%); }
+        .feature-card.color-orange { background: linear-gradient(135deg, #8786a6 0%, #55b7e4 100%); }
+        .feature-card.color-teal { background: linear-gradient(135deg, #002266 0%, #55b7e4 100%); }
+        .feature-card.color-pink { background: linear-gradient(135deg, #55b7e4 0%, #8786a6 100%); }
+        .feature-card.color-indigo { background: linear-gradient(135deg, #27508e 0%, #002266 100%); }
+        .feature-card.color-cyan { background: linear-gradient(135deg, #8786a6 0%, #27508e 100%); }
+
+        /* Mission Section Redesign */
+        .mission-container {
+            min-height: calc(100vh - 72px); /* Account for header */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 5vh 2vw 10vh 2vw;
         }
-        .card-hover-effect:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.07), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+
+        .mission-content-wrapper {
+            width: 100%;
+            max-width: 95vw;
+            margin: 0 auto;
         }
-        /* Restore Tailwind backgrounds for sections */
-        section,
-        .bg-white,
-        .bg-slate-50 {
-            background: inherit !important;
+
+        .mission-sentence-wrapper {
+            text-align: center;
+            margin-bottom: 2vh;
         }
-        /* Restore text colors for headings and paragraphs */
-        h1, h2, h3, h4, h5, h6, p, a, label, span, .text-slate-900, .text-slate-600, .text-slate-700, .text-slate-400, .text-blue-600 {
-            color: inherit !important;
+
+        .mission-sentence {
+            font-size: clamp(10px, 2.2vw, 38px);
+            font-weight: 700;
+            color: #002266;
+            line-height: 1.5;
+            display: inline-block;
+            white-space: nowrap;
         }
-        /* Card backgrounds */
-        .bg-slate-50,
-        .bg-white {
-            background: inherit !important;
+
+        .mission-word-with-dropdown {
+            display: inline-block;
+            position: relative;
+            vertical-align: top;
         }
-        /* Input and textarea fields */
-        input, textarea {
-            background: #fff !important;
-            color: #1e293b !important;
-            border-color: #cbd5e1 !important;
+
+        .mission-highlight {
+            display: inline-block;
+            padding: clamp(2px, 0.4vw, 6px) clamp(6px, 1.2vw, 20px);
+            margin: 0 clamp(1px, 0.2vw, 4px);
+            background: linear-gradient(135deg, #55b7e4 0%, #27508e 100%);
+            color: white;
+            border-radius: clamp(4px, 0.8vw, 12px);
+            box-shadow: 0 clamp(2px, 0.4vw, 6px) clamp(6px, 1.2vw, 20px) rgba(85, 183, 228, 0.3);
+            transition: all 0.3s ease;
+            cursor: default;
+            font-size: inherit;
         }
-        input:focus, textarea:focus {
-            border-color: #2563eb !important;
-            background: #fff !important;
-            color: #1e293b !important;
+
+        .mission-highlight:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 clamp(4px, 0.6vw, 8px) clamp(12px, 1.6vw, 24px) rgba(85, 183, 228, 0.4);
         }
-        /* Button styles */
-        .bg-blue-600 {
-            background: #2563eb !important;
-            color: #fff !important;
+
+        .mission-dropdown {
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            margin-top: clamp(12px, 2vw, 30px);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-width: clamp(80px, 12vw, 200px);
         }
-        .hover\:bg-blue-700:hover {
-            background: #1e40af !important;
+
+        .mission-arrow-down {
+            font-size: clamp(20px, 3vw, 40px);
+            color: #55b7e4;
+            margin-bottom: clamp(8px, 1.2vw, 20px);
+            animation: bounce 2s infinite;
         }
-        /* Footer */
-        footer {
-            background: #1e293b !important;
-            color: #fff !important;
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(clamp(-4px, -0.6vw, -8px));
+            }
+            60% {
+                transform: translateY(clamp(-2px, -0.3vw, -4px));
+            }
+        }
+
+        .mission-static-box {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            padding: clamp(6px, 1vw, 18px) clamp(12px, 2vw, 40px);
+            border-radius: clamp(6px, 1vw, 16px);
+            font-size: clamp(14px, 2vw, 32px);
+            font-weight: 600;
+            color: #27508e;
+            box-shadow: 0 clamp(2px, 0.4vw, 6px) clamp(8px, 1.2vw, 20px) rgba(39, 80, 142, 0.15);
+            border: clamp(1px, 0.15vw, 2px) solid #55b7e4;
+            text-align: center;
+            white-space: nowrap;
+        }
+
+        .mission-animated-container {
+            position: relative;
+            min-height: clamp(30px, 4vw, 70px);
+            min-width: clamp(100px, 14vw, 220px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .mission-animated-item {
+            position: absolute;
+            opacity: 0;
+            transform: scale(0.92) translateY(clamp(8px, 1vw, 15px));
+            background: linear-gradient(135deg, #55b7e4 0%, #27508e 100%);
+            color: white;
+            padding: clamp(6px, 1vw, 18px) clamp(12px, 2vw, 40px);
+            border-radius: clamp(6px, 1vw, 16px);
+            font-size: clamp(14px, 2vw, 32px);
+            font-weight: 600;
+            box-shadow: 0 clamp(2px, 0.4vw, 6px) clamp(8px, 1.2vw, 20px) rgba(85, 183, 228, 0.3);
+            white-space: nowrap;
+            text-align: center;
+        }
+
+        .mission-animated-item.active {
+            animation: itemAppear 2s ease-in-out forwards;
+        }
+
+        @keyframes itemAppear {
+            0% {
+                opacity: 0;
+                transform: scale(0.92) translateY(clamp(8px, 1vw, 15px));
+            }
+            15% {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+            85% {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+            100% {
+                opacity: 0;
+                transform: scale(0.92) translateY(clamp(-8px, -1vw, -15px));
+            }
+        }
+
+        .mission-dropdowns-spacer {
+            height: clamp(80px, 12vw, 180px);
+        }
+
+        /* About Section - Full Page with Highlighted Words */
+        .about-full-section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 80px 40px;
+            position: relative;
+            background: linear-gradient(135deg, #f8fafc 0%, #ffffff 50%, #f8fafc 100%);
+        }
+
+        .about-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .about-text {
+            font-size: clamp(22px, 3.2vw, 44px);
+            line-height: 1.9;
+            font-weight: 700;
+            color: #64748b;
+            margin-bottom: clamp(30px, 4vw, 60px);
+        }
+
+        .about-text:last-child {
+            margin-bottom: 0;
+        }
+
+        .highlight-primary {
+            color: #002266;
+            font-weight: 800;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border: 2px solid #e2e8f0;
+        }
+
+        .product-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(0, 34, 102, 0.15);
+            border-color: #55b7e4;
+        }
+
+        .product-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #002266;
+            margin-bottom: 8px;
+        }
+
+        .product-full-name {
+            font-size: 0.95rem;
+            color: #64748b;
+            margin-bottom: 12px;
+        }
+
+        .product-tag {
+            display: inline-block;
+            padding: 4px 12px;
+            background: linear-gradient(135deg, #55b7e4 0%, #27508e 100%);
+            color: white;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        @media (max-width: 768px) {
+            .about-text {
+                font-size: clamp(18px, 4.5vw, 36px);
+                line-height: 2;
+            }
+        }
+
+        /* Scroll Down Arrow */
+        .scroll-down-arrow {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            cursor: pointer;
+            z-index: 20;
+            animation: bounce-arrow 2s infinite;
+        }
+
+        .scroll-down-arrow svg {
+            width: 50px;
+            height: 50px;
+            stroke: #55b7e4;
+            stroke-width: 3;
+            fill: none;
+            filter: drop-shadow(0 2px 8px rgba(85, 183, 228, 0.4));
+        }
+
+        .scroll-down-arrow:hover svg {
+            stroke: #27508e;
+            filter: drop-shadow(0 4px 12px rgba(39, 80, 142, 0.6));
+        }
+
+        @keyframes bounce-arrow {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateX(-50%) translateY(0);
+            }
+            40% {
+                transform: translateX(-50%) translateY(-12px);
+            }
+            60% {
+                transform: translateX(-50%) translateY(-6px);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .about-text {
+                font-size: clamp(20px, 5vw, 40px);
+            }
         }
     </style>
 </head>
-<body class="bg-white">
+<body class="bg-cf-white">
 
     <!-- Header -->
-    <header class="bg-white/90 backdrop-blur-lg sticky top-0 z-50 border-b border-slate-200">
+    <header class="bg-cf-white shadow-md sticky top-0 z-50 transition-shadow duration-300">
         <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="#" class="text-3xl font-bold font-heading" style="color: #2563eb;">CellForge</a>
-            <div class="hidden md:flex space-x-8 items-center">
-                <a href="#problem" class="text-slate-600 hover:text-blue-600 transition font-medium">The Problem</a>
-                <a href="#solution" class="text-slate-600 hover:text-blue-600 transition font-medium">Our Solution</a>
-                <a href="#technology" class="text-slate-600 hover:text-blue-600 transition font-medium">Technology</a>
-                <a href="#team" class="text-slate-600 hover:text-blue-600 transition font-medium">Team</a>
-                <a href="#contact" class="bg-blue-600 text-white px-5 py-2.5 rounded-lg font-semibold hover:bg-blue-700 transition shadow-sm hover:shadow-md">Contact Us</a>
+            <!-- Logo -->
+            <a href="#home" class="flex-shrink-0">
+                <img src="CellForge_Logo_Transparent.png" 
+                     alt="Cell Forge Logo" 
+                     class="h-14 md:h-16 lg:h-18 transition-transform duration-300 hover:scale-105"
+                     class="h-10 md:h-12 transition-transform duration-300 hover:scale-105"
+                     onerror="this.src='https://placehold.co/200x60/ffffff/002266?text=CellForge&font=inter'; this.onerror=null;">
+            </a>
+            
+            <!-- Desktop Navigation -->
+            <div class="hidden md:flex items-center space-x-2">
+                <a href="#home" class="nav-link">Home</a>
+                <a href="#what-we-do" class="nav-link">What We Do</a>
+                <a href="#about" class="nav-link">About Us</a>
+                <a href="#technology" class="nav-link">Technology</a>
+                <a href="#industries" class="nav-link">Industries</a>
+                <a href="#products" class="nav-link">Products</a>
+                <a href="#services" class="nav-link">Services</a>
+                <a href="#people" class="nav-link">People</a>
+                <a href="#contact" class="nav-link bg-cf-mid-blue text-white hover:bg-cf-dark-blue hover:text-white">Contact Us</a>
             </div>
-            <button id="mobile-menu-button" class="md:hidden flex items-center text-slate-600">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+            
+            <!-- Mobile Menu Button -->
+            <button id="menu-btn" class="md:hidden flex flex-col justify-center items-center space-y-1.5 z-50">
+                <span class="hamburger-line line-1"></span>
+                <span class="hamburger-line line-2"></span>
+                <span class="hamburger-line line-3"></span>
             </button>
         </nav>
+        
         <!-- Mobile Menu -->
-        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-slate-200">
-            <a href="#problem" class="block py-3 px-6 text-base text-slate-600 hover:bg-slate-50">The Problem</a>
-            <a href="#solution" class="block py-3 px-6 text-base text-slate-600 hover:bg-slate-50">Our Solution</a>
-            <a href="#technology" class="block py-3 px-6 text-base text-slate-600 hover:bg-slate-50">Technology</a>
-            <a href="#team" class="block py-3 px-6 text-base text-slate-600 hover:bg-slate-50">Team</a>
-            <a href="#contact" class="block py-3 px-6 text-base text-slate-600 hover:bg-slate-50">Contact Us</a>
+        <div id="mobile-menu" class="hidden md:hidden absolute top-0 left-0 w-full min-h-screen bg-cf-white z-40">
+            <div class="flex flex-col items-center justify-center h-screen space-y-4">
+                <a href="#home" class="nav-link text-xl">Home</a>
+                <a href="#what-we-do" class="nav-link text-xl">What We Do</a>
+                <a href="#about" class="nav-link text-xl">About Us</a>
+                <a href="#technology" class="nav-link text-xl">Technology</a>
+                <a href="#industries" class="nav-link text-xl">Industries</a>
+                <a href="#products" class="nav-link text-xl">Products</a>
+                <a href="#services" class="nav-link text-xl">Services</a>
+                <a href="#people" class="nav-link text-xl">People</a>
+                <a href="#contact" class="nav-link text-xl bg-cf-mid-blue text-white hover:bg-cf-dark-blue hover:text-white">Contact Us</a>
+            </div>
         </div>
     </header>
 
-    <!-- Hero Section -->
-    <section class="hero-gradient relative flex items-center justify-center min-h-[500px] md:min-h-[600px] bg-black">
-        <div class="absolute inset-0 bg-black opacity-90"></div>
-        <div class="relative z-10 flex flex-col items-center justify-center w-full h-full text-white px-4">
-            <div class="flex flex-col items-center justify-center mb-8">
-                <span class="font-heading font-extrabold text-6xl md:text-8xl text-blue-600 text-center">CellForge</span>
-            </div>
-            <div class="w-full flex items-center justify-center mb-2">
-                <span class="text-xl md:text-2xl font-normal text-center bg-white text-black px-4 py-2 rounded-lg w-full justify-center flex">Making 100% Animal-Free, Endotoxin free</span>
-            </div>
-            <div class="w-full flex items-center justify-center mb-8" style="height: 60px;">
-                <span id="protein-anim" class="font-heading text-2xl md:text-4xl font-normal text-blue-600 text-center"></span>
+    <!-- Main Content -->
+    <main>
+
+        <!-- Hero Section -->
+        <section id="home" class="relative min-h-screen flex items-center justify-center overflow-hidden bg-white" style="padding-bottom: 100px;">
+            <!-- Animation Container -->
+            <div class="hero-animation-container" aria-hidden="true">
+                <div class="circle-arc arc-1"></div>
+                <div class="circle-arc arc-2"></div>
+                <div class="circle-arc arc-3"></div>
+                <div class="circle-arc arc-4"></div>
+                <div class="circle-arc arc-5"></div>
             </div>
             
-        </div>
-        <style>
-            #protein-anim {
-                display: inline-block;
-                min-width: 320px;
-                white-space: nowrap;
-                overflow: hidden;
-                position: relative;
-            }
-            .protein-slide-in {
-                animation: proteinIn 0.7s cubic-bezier(.4,0,.2,1) forwards;
-            }
-            .protein-slide-out {
-                animation: proteinOut 0.7s cubic-bezier(.4,0,.2,1) forwards;
-            }
-            @keyframes proteinIn {
-                from { opacity: 0; transform: translateX(-80px);}
-                to   { opacity: 1; transform: translateX(0);}
-            }
-            @keyframes proteinOut {
-                from { opacity: 1; transform: translateX(0);}
-                to   { opacity: 0; transform: translateX(80px);}
-            }
-        </style>
-        <script>
-            const proteins = [
-                "Cytokines",
-                "Growth Factors",
-                "Antibodies",
-                "Membrane Proteins",
-                "Antigens",
-                "Difficult to Make Proteins"
-            ];
-            const animEl = document.getElementById('protein-anim');
-            let idx = 0;
-            function showProtein(i) {
-                animEl.textContent = proteins[i];
-                animEl.classList.remove('protein-slide-out');
-                animEl.classList.add('protein-slide-in');
-                setTimeout(() => {
-                    animEl.classList.remove('protein-slide-in');
-                    animEl.classList.add('protein-slide-out');
-                    setTimeout(() => {
-                        idx = (i + 1) % proteins.length;
-                        showProtein(idx);
-                    }, 700);
-                }, 1400);
-            }
-            showProtein(idx);
-        </script>
-    </section>
-   
-    
+            <!-- Hero Content -->
+            <div class="relative z-10 text-center p-8 md:p-12 max-w-6xl mx-auto">
+                <img src="CellForge_Logo_Transparent.png" 
+                     alt="Cell Forge Logo" 
+                     class="w-64 sm:w-80 md:w-96 lg:w-[500px] mx-auto mb-10"
+                     onerror="this.src='https://placehold.co/500x150/ffffff/002266?text=CellForge&font=inter'; this.onerror=null;">
+                <p class="mt-6 text-lg sm:text-xl md:text-2xl lg:text-3xl font-semibold text-cf-dark-blue max-w-3xl mx-auto bg-white/90 backdrop-blur-sm py-6 px-8 rounded-2xl shadow-2xl border border-cf-light-blue/20">
+                    Sustainable. Animal Free. Recombinant Proteins.
+                </p>
+            </div>
+        </section>
 
-    <!-- Solution Section -->
-    <section id="solution" class="py-20 bg-white">
-        <div class="container mx-auto px-6">
-            <div class="grid md:grid-cols-2 gap-16 items-center">
-                <div class="space-y-8">
-                    <h2 class="section-title text-slate-900 font-heading">The CellForge Advantage</h2>
-                    <p class="section-subtitle !text-slate-600 !font-normal">Our novel ciliate-based precision fermentation platform directly addresses the industry's biggest challenges.</p>
-                    <div class="space-y-6">
-                        <div class="flex items-start">
-                            <div class="flex-shrink-0 h-10 w-10 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center">
-                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
-                            </div>
-                            <div class="ml-4">
-                                <h4 class="text-lg font-bold font-heading">Reduced Lead Times</h4>
-                                <p class="text-slate-600">Indigenous production slashes delivery from 6 weeks to just 1 week.</p>
+        <!-- What We Do Section -->
+        <section id="what-we-do" class="relative py-20 md:py-28 bg-gradient-to-br from-gray-50 via-white to-blue-50" style="min-height: 100vh;">
+            <div class="mission-container">
+                <div class="container mx-auto px-6">
+                    <div class="mission-content-wrapper">
+                        
+                        <!-- Single Continuous Sentence -->
+                        <div class="mission-sentence-wrapper">
+                            <div class="mission-sentence">
+                                We engineer 
+                                <span class="mission-word-with-dropdown">
+                                    <span class="mission-highlight">Microbes</span>
+                                    <div class="mission-dropdown">
+                                        <div class="mission-arrow-down">↓</div>
+                                        <div class="mission-static-box">Ciliate</div>
+                                    </div>
+                                </span>
+                                to make next generation 
+                                <span class="mission-word-with-dropdown">
+                                    <span class="mission-highlight">Reagents</span>
+                                    <div class="mission-dropdown">
+                                        <div class="mission-arrow-down">↓</div>
+                                        <div class="mission-animated-container">
+                                            <div class="mission-animated-item" data-option="0">Cytokines</div>
+                                            <div class="mission-animated-item" data-option="1">Growth Factors</div>
+                                            <div class="mission-animated-item" data-option="2">Enzymes</div>
+                                            <div class="mission-animated-item" data-option="3">Antibodies</div>
+                                            <div class="mission-animated-item" data-option="4">Membrane Proteins</div>
+                                        </div>
+                                    </div>
+                                </span>
                             </div>
                         </div>
-                        <div class="flex items-start">
-                            <div class="flex-shrink-0 h-10 w-10 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center">
-                               <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v.01"></path></svg>
+                        
+                        <!-- Spacer for dropdown content -->
+                        <div class="mission-dropdowns-spacer"></div>
+                        
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section - Full Page -->
+        <section id="about" class="about-full-section relative">
+            <div class="container mx-auto px-6">
+            <div class="about-content">
+                <p class="about-text">
+                <span class="highlight-primary font-bold">Cell Forge</span> is a 
+                <span class="highlight-primary font-bold">biomanufacturing</span> company harnessing 
+                <span class="highlight-primary font-bold">computational biology</span> and 
+                <span class="highlight-primary font-bold">precision fermentation</span> to produce 
+                <span class="highlight-primary font-bold">Affordable, Animal-free, Sustainable, </span> recombinant proteins for
+                <span class="highlight-primary font-bold"> <a href="#industries">Bioindustry</a></span>
+            
+                </p>
+            
+            </div>
+            </div>
+        </section>
+
+        <!-- Technology Section -->
+        <section id="technology" class="py-20 md:py-28 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="max-w-7xl mx-auto">
+                    <!-- Section Title -->
+                    <div class="text-center mb-16">
+                        <h2 class="text-4xl md:text-5xl lg:text-6xl font-bold text-cf-dark-blue mb-6">
+                            TetraFORGE™
+                        </h2>
+                        <p class="text-xl md:text-2xl lg:text-3xl text-cf-mid-blue font-semibold mb-12">
+                            Engineered Microbe + Precision Fermentation
+                        </p>
+                    </div>
+                    
+                    <!-- Platform Image -->
+                    <div class="bg-gradient-to-br from-white to-gray-50 rounded-3xl shadow-2xl p-8 md:p-12 lg:p-16 border border-cf-light-blue/30">
+                        <img src="platform-diagram.png" 
+                             alt="TetraFORGE Platform - AI-based Computational Biology, Genetic Engineering, Scale Up, Purification, Quality Assurance" 
+                             class="w-full h-auto mx-auto rounded-xl"
+                             onerror="this.src='https://placehold.co/1400x400/f8fafc/002266?text=TetraFORGE+Platform+Diagram&font=inter'; this.onerror=null;">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- USP Section (Why TetraFORGE) -->
+        <section id="usp" class="py-20 md:py-28 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center max-w-7xl mx-auto">
+                    
+                    <!-- Left Side: Title and Description -->
+                    <div class="space-y-8">
+                        <h2 class="text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight text-cf-dark-blue">
+                            Why<br>TetraFORGE?
+                        </h2>
+                        <p class="text-xl md:text-2xl text-gray-600 leading-relaxed">
+                            Our platform is built on a novel Ciliate based Precision Fermentation system, offering unparalleled advantages for modern biomanufacturing.
+                        </p>
+                    </div>
+                    
+                    <!-- Right Side: Vertical Carousel -->
+                    <div class="feature-carousel">
+                        <div class="feature-track" id="feature-track">
+                            <!-- Feature Cards -->
+                            <div class="feature-card color-green active" data-index="0">
+                                <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=200&h=200&fit=crop" alt="Animal-Free System">
+                                <div class="text-content">
+                                    <h3>Animal-Free System</h3>
+                                    <p>100% </p>
+                                </div>
                             </div>
-                            <div class="ml-4">
-                                <h4 class="text-lg font-bold font-heading">Lower Costs & Higher Margins</h4>
-                                <p class="text-slate-600">Our system reduces costs by up to 70% with zero licensing fees.</p>
+                            
+                            <div class="feature-card color-purple" data-index="1">
+                                <img src="https://images.unsplash.com/photo-1583911860205-72f8ac8ddcbe?w=200&h=200&fit=crop" alt="Endotoxin-Free">
+                                <div class="text-content">
+                                    <h3>Endotoxin-Free</h3>
+                                    <p>High Purity</p>
+                                </div>
                             </div>
-                        </div>
-                        <div class="flex items-start">
-                            <div class="flex-shrink-0 h-10 w-10 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center">
-                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                            
+                            <div class="feature-card color-blue" data-index="2">
+                                <img src="https://images.unsplash.com/photo-1567427017947-545c5f8d16ad?w=200&h=200&fit=crop" alt="High-Performance Yields">
+                                <div class="text-content">
+                                    <h3>High-Performance</h3>
+                                    <p>Yields</p>
+                                </div>
                             </div>
-                            <div class="ml-4">
-                                <h4 class="text-lg font-bold font-heading">Unmatched Quality</h4>
-                                <p class="text-slate-600">100% animal and endotoxin-free products for the highest safety and purity.</p>
+                            
+                            <div class="feature-card color-orange" data-index="3">
+                                <img src="https://images.unsplash.com/photo-1628595351029-c2bf17511435?w=200&h=200&fit=crop" alt="Non-Pathogenic Host">
+                                <div class="text-content">
+                                    <h3>Non-Pathogenic</h3>
+                                    <p>Microbe</p>
+                                </div>
+                            </div>
+                            
+                            <div class="feature-card color-teal" data-index="4">
+                                <img src="https://images.unsplash.com/photo-1614935151651-0bea6508db6b?w=200&h=200&fit=crop" alt="Smart Purification">
+                                <div class="text-content">
+                                    <h3>Smart Purification </h3>
+                                    <p>Secretory Proteins</p>
+                                </div>
+                            </div>
+                            
+                            <div class="feature-card color-pink" data-index="5">
+                                <img src="https://images.unsplash.com/photo-1582560469781-1965b9af903d?w=200&h=200&fit=crop" alt="Fully Bioactive">
+                                <div class="text-content">
+                                    <h3>Fully Bioactive</h3>
+                                    <p>Proteins</p>
+                                </div>
+                            </div>
+                            
+                            <div class="feature-card color-indigo" data-index="6">
+                                <img src="https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=200&h=200&fit=crop" alt="Native Glycosylation">
+                                <div class="text-content">
+                                    <h3>Native</h3>
+                                    <p>Glycosylation</p>
+                                </div>
+                            </div>
+                            
+                            <div class="feature-card color-cyan" data-index="7">
+                                <img src="https://images.unsplash.com/photo-1576086213369-97a306d36557?w=200&h=200&fit=crop" alt="Plug-and-Play">
+                                <div class="text-content">
+                                    <h3>Plug-and-Play</h3>
+                                    <p>Fermentation Scale-up</p>
+                                </div>
+                            </div>
+                            
+                            <div class="feature-card color-green" data-index="8">
+                                <img src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=200&h=200&fit=crop" alt="Green Technology">
+                                <div class="text-content">
+                                    <h3>Green Technology</h3>
+                                    <p>Planet-positive</p>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div>
-                    <img src="https://placehold.co/600x450/dbeafe/1d4ed8?text=Clean+Bioreactor+Environment" alt="CellForge Solution" class="rounded-xl shadow-xl w-full">
+                    
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+        
+        
+        
+        <!-- Industries Section -->
+        <section id="industries" class="py-20 md:py-28 bg-gradient-to-br from-gray-50 via-white to-blue-50">
+            <div class="container mx-auto px-6">
+                <h2 class="text-4xl md:text-5xl font-bold text-center text-cf-dark-blue mb-16">
+                    Industries
+                </h2>
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 max-w-6xl mx-auto">
+                    <!-- Industry Card - Diagnostics -->
+                    <div class="bg-cf-white rounded-2xl shadow-xl overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-2xl border border-gray-100">
+                        <div class="h-52 overflow-hidden">
+                            <img src="diagnostic.png" alt="Diagnostics" class="w-full h-full object-cover transition-transform duration-300 hover:scale-110">
+                        </div>
+                        <div class="p-6 text-center">
+                            <h3 class="text-xl font-semibold text-cf-mid-blue">Diagnostics</h3>
+                        </div>
+                    </div>
+                    
+                    <!-- Industry Card - Biopharma -->
+                    <div class="bg-cf-white rounded-2xl shadow-xl overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-2xl border border-gray-100">
+                        <div class="h-52 overflow-hidden">
+                            <img src="biopharma.png" alt="Biopharma" class="w-full h-full object-cover transition-transform duration-300 hover:scale-110">
+                        </div>
+                        <div class="p-6 text-center">
+                            <h3 class="text-xl font-semibold text-cf-mid-blue">Biopharma</h3>
+                        </div>
+                    </div>
+                    
+                    <!-- Industry Card - Food Technology -->
+                    <div class="bg-cf-white rounded-2xl shadow-xl overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-2xl border border-gray-100">
+                        <div class="h-52 overflow-hidden">
+                            <img src="Mock Meat.png" alt="Food Technology" class="w-full h-full object-cover transition-transform duration-300 hover:scale-110">
+                        </div>
+                        <div class="p-6 text-center">
+                            <h3 class="text-xl font-semibold text-cf-mid-blue">Food Technology</h3>
+                        </div>
+                    </div>
+                    
+                    <!-- Industry Card - Cosmetics -->
+                    <div class="bg-cf-white rounded-2xl shadow-xl overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-2xl border border-gray-100">
+                        <div class="h-52 overflow-hidden">
+                            <img src="cosmetic.png" alt="Cosmetics" class="w-full h-full object-cover transition-transform duration-300 hover:scale-110">
+                        </div>
+                        <div class="p-6 text-center">
+                            <h3 class="text-xl font-semibold text-cf-mid-blue">Cosmetics</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-    <!-- Technology Highlights Section -->
-    <section class="py-20 bg-white">
-        <div class="container mx-auto px-6">
-            <div class="text-center mb-16">
-                <h2 class="section-title text-slate-900 font-heading">Our Technology: TetraForge™
-                <div class="text-center mb-2">
-                    <span class="block text-lg text-slate-600 font-normal mt-4">Programmed Ciliate + Precision Fermentation</span>
-                </div>
-</h2>
-        <div class="flex flex-col md:flex-row justify-center items-stretch gap-8">
-            <!-- Safe -->
-            <div class="flex flex-col items-center w-full md:w-1/3">
-                <div class="font-heading text-2xl font-bold text-blue-600 mb-4">Safe</div>
-                <div class="w-full bg-white rounded-xl flex items-center justify-center h-32 mb-4">
-                    <img src="images/shield.png" alt="Safe" class="h-20 w-20 object-contain" />
-                </div>
-                <div class="text-slate-700 text-center text-lg">Non-pathogenic fresh water Microbe</div>
-            </div>
-            <!-- Smart -->
-            <div class="flex flex-col items-center w-full md:w-1/3">
-                <div class="font-heading text-2xl font-bold text-blue-600 mb-4">Smart</div>
-                <div class="w-full bg-white rounded-xl flex items-center justify-center h-32 mb-4">
-                    <img src="images/idea.png" alt="Smart" class="h-20 w-20 object-contain" />
-                </div>
-                <div class="text-slate-700 text-center text-lg">Secrete Proteins directly into media</div>
-            </div>
-            <!-- Scalable -->
-            <div class="flex flex-col items-center w-full md:w-1/3">
-                <div class="font-heading text-2xl font-bold text-blue-600 mb-4">Scalable</div>
-                <div class="w-full bg-white rounded-xl flex items-center justify-center h-32 mb-4">
-                    <img src="images/distillatory.png" alt="Scalable" class="h-20 w-20 object-contain" />
-                </div>
-                <div class="text-slate-700 text-center text-lg">Plug &amp; Play with market standard microbial fermenters</div>
-            </div>
-        </div>
-        </div>
+        <!-- Products Section -->
+        <section id="products" class="py-20 md:py-28 bg-gradient-to-br from-gray-50 via-white to-blue-50">
+            <div class="container mx-auto px-6">
+                <h2 class="text-4xl md:text-5xl font-bold text-center text-cf-dark-blue mb-6">
+                    Our Products
+                </h2>
+                 <p class="text-lg text-gray-500 italic mt-9 text-center">
+                        Coming soon...
+                    </p><br>
+
+                <p class="text-center text-xl text-gray-600 mb-16 max-w-3xl mx-auto">
+                    High-purity, animal-free recombinant proteins for research applications
+                </p>
+                
+                <!-- Growth Factors Row -->
+                <div class="max-w-6xl mx-auto mb-12">
+                    <h3 class="text-2xl font-bold text-cf-mid-blue mb-6 text-center">Growth Factors</h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
+                        <!-- Product Card - EGF -->
+                        <div class="product-card">
+                            <div class="product-name">EGF</div>
+                            <div class="product-full-name">Epidermal Growth Factor</div>
+                            <div class="product-tag">Growth Factor</div>
+                        </div>
+                        
+                        <!-- Product Card - FGF -->
+                        <div class="product-card">
+                            <div class="product-name">FGF-2</div>
+                            <div class="product-full-name">Fibroblast Growth Factor 2</div>
+                            <div class="product-tag">Growth Factor</div>
+                        </div>
+                    </div>
                 </div>
                 
+                <!-- Cytokines Row -->
+                <div class="max-w-6xl mx-auto">
+                    <h3 class="text-2xl font-bold text-cf-mid-blue mb-6 text-center">Cytokines</h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                        <!-- Product Card - IL-2 -->
+                        <div class="product-card">
+                            <div class="product-name">IL-2</div>
+                            <div class="product-full-name">Interleukin-2</div>
+                            <div class="product-tag">Cytokine</div>
+                        </div>
+                        
+                        <!-- Product Card - IL-7 -->
+                        <div class="product-card">
+                            <div class="product-name">IL-7</div>
+                            <div class="product-full-name">Interleukin-7</div>
+                            <div class="product-tag">Cytokine</div>
+                        </div>
+                        
+                        <!-- Product Card - IL-15 -->
+                        <div class="product-card">
+                            <div class="product-name">IL-15</div>
+                            <div class="product-full-name">Interleukin-15</Interleukin-15></div>
+                            <div class="product-tag">Cytokine</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="text-center mt-12">
+                    <p class="text-lg text-gray-600 mb-6 italic">
+                        Looking for a specific protein not listed here?
+                    
+                   
+                </div>
             </div>
-        </div>
-    </section>
-        </div>
-    </section>
+        </section>
 
-<!-- Sustainable Future Section -->
-<section class="relative h-[400px] md:h-[500px] flex items-center justify-center overflow-hidden" style="background: #000;">
-    <img src="images/green.png" alt="Nature Moving Background" class="absolute inset-0 w-full h-full object-cover z-0" style="opacity: 0.5;">
-    <div class="relative z-10 flex items-center justify-center w-full h-full">
-    <div class="text-center">
-        <h2 class="absolute top-28 left-1/2 transform -translate-x-1/2 text-5xl md:text-6xl font-heading font-extrabold text-white text-center drop-shadow-lg px-6 mb-0 w-full z-10">
-            "Sustainable Future with Precision Fermentation"
-        
-        </h2>
-        <div class="flex flex-row items-end justify-center gap-12 absolute bottom-6 left-1/2 -translate-x-1/2 z-20">
-            <!-- Goal 3: Good Health and Well-being -->
-            <img src="https://sdgs.un.org/sites/default/files/goals/E_SDG_Icons-03.jpg" alt="SDG 3" class="h-44 w-44 object-contain rounded-lg shadow-lg" />
-            <!-- Goal 8: Decent Work and Economic Growth -->
-            <img src="https://sdgs.un.org/sites/default/files/goals/E_SDG_Icons-08.jpg" alt="SDG 8" class="h-44 w-44 object-contain rounded-lg shadow-lg" />
-            <!-- Goal 9: Industry, Innovation and Infrastructure -->
-            <img src="https://sdgs.un.org/sites/default/files/goals/E_SDG_Icons-09.jpg" alt="SDG 9" class="h-44 w-44 object-contain rounded-lg shadow-lg" />
-            <!-- Goal 13: Climate Action -->
-            <img src="https://sdgs.un.org/sites/default/files/goals/E_SDG_Icons-13.jpg" alt="SDG 13" class="h-44 w-44 object-contain rounded-lg shadow-lg" />
-            <!-- Goal 17: Partnerships for the Goals -->
-            <img src="https://sdgs.un.org/sites/default/files/goals/E_SDG_Icons-17.jpg" alt="SDG 17" class="h-44 w-44 object-contain rounded-lg shadow-lg" />
-        </div>
-            
-        </div>
-        
-        </h2>
-    </div>
-</section>
-    <!-- Applications Section --> 
-    <section id="applications" class="py-20 bg-white">
-        <div class="container mx-auto px-6">
-            <div class="text-center mb-16">
-                <h2 class="section-title text-slate-900 font-heading">Applications</h2>
-                <p class="section-subtitle mt-4 max-w-3xl mx-auto">One Platform. Versatile Applications. 
-                    Sustainable by Design.</p>
-            </div>
-           
-            <!-- First row: 3 cards in one line -->
-            <div class="flex flex-col md:flex-row justify-center items-stretch gap-10 mb-10">
-                <!-- Bio-pharma -->
-                <div class="bg-slate-50 rounded-xl shadow-lg p-0 text-center card-hover-effect flex flex-col items-center justify-center h-64 w-full md:w-1/3">
-                    <div class="flex flex-col items-center justify-center h-full w-full">
-                        <img src="images/biopharma.png" alt="Bio-pharma" class="mx-auto rounded-lg w-32 h-32 object-cover mb-2">
-                        <div class="flex items-center justify-center w-full">
-                            <span class="font-heading font-bold text-xl text-slate-900 bg-white rounded-lg px-2 py-1 mt-2 shadow-sm w-32 text-center">Bio-pharma</span>
-                        </div>
+        <!-- Services Section -->
+        <section id="services" class="py-20 md:py-28 bg-gradient-to-br from-gray-50 via-white to-blue-50">
+            <div class="container mx-auto px-6">
+                <h2 class="text-4xl md:text-5xl font-bold text-center text-cf-dark-blue mb-16">
+                    Custom Protein Services
+                </h2>
+                
+                <div class="max-w-5xl mx-auto">
+                    <!-- Main intro text -->
+                    <div class="text-center mb-12">
+                        <p class="text-2xl md:text-3xl font-bold text-cf-dark-blue mb-6">
+                            We express what others can't — and we do it cost-effectively.
+                        </p>
+                        <p class="text-xl md:text-2xl text-gray-700 leading-relaxed mb-4">
+                            We collaborate with teams facing high-complexity recombinant protein challenges with TetraFORGE™ that traditional hosts simply can't deliver on.
+                        </p>
+                        <p class="text-xl md:text-2xl text-gray-700 leading-relaxed">
+                            Our next-generation expression platform is built for difficult-to-express, bioactive proteins, offering scalable, reliable production.
+                        </p>
                     </div>
-                </div>
-                <!-- Diagnostics -->
-                <div class="bg-slate-50 rounded-xl shadow-lg p-0 text-center card-hover-effect flex flex-col items-center justify-center h-64 w-full md:w-1/3">
-                    <div class="flex flex-col items-center justify-center h-full w-full">
-                        <img src="images/diagnostic.png" alt="Diagnostics" class="mx-auto rounded-lg w-32 h-32 object-cover mb-2">
-                        <div class="flex items-center justify-center w-full">
-                            <span class="font-heading font-bold text-xl text-slate-900 bg-white rounded-lg px-2 py-1 mt-2 shadow-sm w-32 text-center">Diagnostics</span>
-                        </div>
-                    </div>
-                </div>
-                <!-- Cell Culture -->
-                <div class="bg-slate-50 rounded-xl shadow-lg p-0 text-center card-hover-effect flex flex-col items-center justify-center h-64 w-full md:w-1/3">
-                    <div class="flex flex-col items-center justify-center h-full w-full">
-                        <img src="images/cellculture.png" alt="Life-science Research" class="mx-auto rounded-lg w-32 h-32 object-cover mb-2">
-                        <div class="flex items-center justify-center w-full">
-                            <span class="font-heading font-bold text-xl text-slate-900 bg-white rounded-lg px-2 py-1 mt-2 shadow-sm w-32 text-center">Biotechnology Research</span>
-                        </div>
-                    </div>
-                </div>
-               
-            </div>
-            <!-- Second row: 2 cards centered -->
-            <div class="flex flex-col md:flex-row justify-center items-stretch gap-10">
-                 <!-- Cosmetics -->
-                <div class="bg-slate-50 rounded-xl shadow-lg p-0 text-center card-hover-effect flex flex-col items-center justify-center h-64 w-full md:w-1/3">
-                    <div class="flex flex-col items-center justify-center h-full w-full">
-                        <img src="images/cosmetic.png" alt="Cosmetics" class="mx-auto rounded-lg w-32 h-32 object-cover mb-2">
-                        <div class="flex items-center justify-center w-full">
-                            <span class="font-heading font-bold text-xl text-slate-900 bg-white rounded-lg px-2 py-1 mt-2 shadow-sm w-32 text-center">Cosmetics</span>
-                        </div>
-                    </div>
-                </div>
-                <!-- Future Foods -->
-                <div class="bg-slate-50 rounded-xl shadow-lg p-0 text-center card-hover-effect flex flex-col items-center justify-center h-64 w-full md:w-1/3">
-                    <div class="flex flex-col items-center justify-center h-full w-full">
-                        <img src="images/Mock Meat.png" alt="Future Foods" class="mx-auto rounded-lg w-32 h-32 object-cover mb-2">
-                        <div class="flex items-center justify-center w-full">
-                            <span class="font-heading font-bold text-xl text-slate-900 bg-white rounded-lg px-2 py-1 mt-2 shadow-sm w-32 text-center">Future Foods</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <!-- Team Section -->
-    <section id="team" class="py-20 bg-white">
-        <div class="text-center mb-16">
-            <h2 class="section-title text-slate-900 font-heading">Our Team</h2>
-            <p class="section-subtitle mt-4 max-w-3xl mx-auto">Led by a team of experienced scientists, innovators, and business leaders.</p>
-        </div>
-        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-10">
-            <!-- Team Member 1 -->
-            <div class="text-center">
-                <img src="images/Akanksha2.jpg" alt="Akanksha Wakhare" class="w-48 h-48 mx-auto rounded-full shadow-lg mb-4 border border-black">
-                <div class="font-heading font-bold text-black text-xl mb-2">Akanksha Wakhare</div>
-                <div class="font-heading font-bold text-black mb-4">Co-founder & CEO</div>
-                <a href="https://www.linkedin.com/in/akanksha-wakhare/" target="_blank" rel="noopener noreferrer" class="inline-block">
-                    <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/linkedin.svg" alt="LinkedIn" class="w-6 h-6 mx-auto" style="filter: invert(0); fill: #2563eb;">
-                </a>
-            </div>
-            <!-- Team Member 2 -->
-            <div class="text-center">
-                <img src="images/Niraj.jpg" alt="Niraj Tadasare" class="w-48 h-48 mx-auto rounded-full shadow-lg mb-4 border border-black">
-                <div class="font-heading font-bold text-black text-xl mb-2">Niraj Tadsare</div>
-                <div class="font-heading font-bold text-black mb-4">Co-founder & CTO</div>
-                <a href="https://www.linkedin.com/in/niraj-tadasare/" target="_blank" rel="noopener noreferrer" class="inline-block">
-                    <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/linkedin.svg" alt="LinkedIn" class="w-6 h-6 mx-auto" style="filter: invert(0); fill: #2563eb;">
-                </a>
-            </div>
-            <!-- Team Member 3 -->
-            <div class="text-center">
-                <img src="images/Marcus-Hartmann.webp" alt="Dr. Marcus Hartmann" class="w-48 h-48 mx-auto rounded-full shadow-lg mb-4 border border-black">
-                <div class="font-heading font-bold text-black text-xl mb-2">Dr. Marcus Hartmann</div>
-                <div class="font-heading font-bold text-black mb-4">Scientific Advisor</div>
-                <a href="https://www.linkedin.com/in/marcus-hartmann-7b8b6a1/" target="_blank" rel="noopener noreferrer" class="inline-block">
-                    <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/linkedin.svg" alt="LinkedIn" class="w-6 h-6 mx-auto" style="filter: invert(0); fill: #2563eb;">
-                </a>
-            </div>
-            <!-- Team Member 4 -->
-            <div class="text-center">
-                <img src="images/Lalit.jpg" alt="Lalith Kishore" class="w-48 h-48 mx-auto rounded-full shadow-lg mb-4 border border-black">
-                <div class="font-heading font-bold text-black text-xl mb-2">Lalith Kishore</div>
-                <div class="font-heading font-bold text-black mb-4">Business Advisor</div>
-                <a href="https://www.linkedin.com/in/lalith-kishore/" target="_blank" rel="noopener noreferrer" class="inline-block">
-                    <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/linkedin.svg" alt="LinkedIn" class="w-6 h-6 mx-auto" style="filter: invert(0); fill: #2563eb;">
-                </a>
-            </div>
-        </div>
-    </section>
-    
 
-    <!-- Contact Section -->
-    <section id="contact" class="py-20 bg-slate-50">
-        <div class="container mx-auto px-6">
-            <div class="text-center mb-12">
-                <h2 class="section-title text-slate-900 font-heading">Get In Touch</h2>
-                <p class="section-subtitle mt-4">We'd love to hear from you. Reach out to discuss partnerships or our technology.</p>
-            </div>
-            <div class="max-w-4xl mx-auto grid md:grid-cols-2 gap-10 bg-white p-8 rounded-xl shadow-lg border">
-                <div>
-                    <h3 class="text-2xl font-bold mb-4 text-slate-900 font-heading">Contact Information</h3>
-                    <p class="mb-6 text-slate-600">Feel free to contact us via email, phone, or visit our office.</p>
-                    <div class="space-y-4">
-                        <p class="flex items-center text-slate-700"><svg class="w-5 h-5 mr-3 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg> <a href="mailto:akanksha.wakhare@cellforge.in" class="hover:text-blue-600">akanksha.wakhare@cellforge.in</a></p>
-                        <p class="flex items-center text-slate-700"><svg class="w-5 h-5 mr-3 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg> +91 87673 80223</p>
-                        <p class="flex items-start text-slate-700"><svg class="w-5 h-5 mr-3 text-blue-600 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg> <span>2nd Floor, 198, CMH Rd, Stage 2, Indiranagar, Bengaluru, Karnataka 560038</span></p>
+                    <!-- Pay per milestone section -->
+                    <div class="bg-gradient-to-br from-cf-dark-blue to-cf-mid-blue text-white rounded-2xl shadow-xl p-6 mb-12">
+                        <p class="text-xl md:text-2xl font-bold text-center">
+                            Flexible, Risk-Free Pricing Model
+                        </p>
+                    </div>
+
+                    <!-- Milestones -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                        <!-- Milestone 1 -->
+                        <div class="bg-white rounded-2xl shadow-lg p-6 border-t-4 border-cf-light-blue hover:shadow-xl transition-all duration-300 hover:scale-105">
+                            <h3 class="text-lg md:text-xl font-bold text-cf-dark-blue mb-3">
+                                Milestone 1
+                            </h3>
+                            <p class="text-base text-gray-700">
+                                Expression strain generated for the target protein.
+                            </p>
+                        </div>
+
+                        <!-- Milestone 2 -->
+                        <div class="bg-white rounded-2xl shadow-lg p-6 border-t-4 border-cf-mid-blue hover:shadow-xl transition-all duration-300 hover:scale-105">
+                            <h3 class="text-lg md:text-xl font-bold text-cf-dark-blue mb-3">
+                                Milestone 2
+                            </h3>
+                            <p class="text-base text-gray-700">
+                                Stable strain scale-up for ongoing process development.
+                            </p>
+                        </div>
+
+                        <!-- Milestone 3 -->
+                        <div class="bg-white rounded-2xl shadow-lg p-6 border-t-4 border-cf-light-blue hover:shadow-xl transition-all duration-300 hover:scale-105">
+                            <h3 class="text-lg md:text-xl font-bold text-cf-dark-blue mb-3">
+                                Milestone 3
+                            </h3>
+                            <p class="text-base text-gray-700">
+                                Optimized fermentation parameters, titre validation, and purification.
+                            </p>
+                        </div>
+
+                        <!-- Milestone 4+ -->
+                        <div class="bg-white rounded-2xl shadow-lg p-6 border-t-4 border-cf-mid-blue hover:shadow-xl transition-all duration-300 hover:scale-105">
+                            <h3 class="text-lg md:text-xl font-bold text-cf-dark-blue mb-3">
+                                Milestone 4+
+                            </h3>
+                            <p class="text-base text-gray-700">
+                                QC-backed scale-up runs.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- CTA -->
+                    <div class="text-center mt-12">
+                        <a href="mailto:akanksha.wakhare@cellforge.in" 
+                           class="inline-block bg-gradient-to-r from-cf-mid-blue to-cf-light-blue text-white font-semibold text-lg px-10 py-4 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
+                           Contact us for Custom Protein Services
+                        </a>
                     </div>
                 </div>
-                <form>
-                    <div class="mb-4">
-                        <label for="name" class="block text-slate-700 font-medium mb-2">Your Name</label>
-                        <input type="text" id="name" name="name" class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
-                    </div>
-                    <div class="mb-4">
-                        <label for="email" class="block text-slate-700 font-medium mb-2">Your Email</label>
-                        <input type="email" id="email" name="email" class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
-                    </div>
-                    <div class="mb-4">
-                        <label for="message" class="block text-slate-700 font-medium mb-2">Message</label>
-                        <textarea id="message" name="message" rows="4" class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required></textarea>
-                    </div>
-                    <button type="submit" class="w-full bg-blue-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-blue-700 transition shadow-md hover:shadow-lg">Send Message</button>
-                </form>
             </div>
-        </div>
-    </section>
+        </section>
+
+        <!-- People Section (Team) -->
+        <section id="people" class="py-20 md:py-28 bg-gradient-to-br from-gray-50 via-white to-blue-50">
+            <div class="container mx-auto px-6">
+                <h2 class="text-4xl md:text-5xl font-bold text-center text-cf-dark-blue mb-20">
+                    Meet Our Team
+                </h2>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 max-w-6xl mx-auto">
+                    <!-- Team Member -->
+                    <div class="text-center">
+                        <a href="https://www.linkedin.com/in/akankshawakhare97/" target="_blank" rel="noopener noreferrer" class="block group">
+                            <div class="relative mb-6 mx-auto w-52 h-52">
+                                <img src="Akanksha2.jpg" 
+                                     alt="Akanksha Wakhare" 
+                                     class="w-full h-full rounded-full object-cover shadow-xl transition-all duration-300 group-hover:scale-105 group-hover:shadow-2xl border-4 border-white"
+                                     onerror="this.src='https://placehold.co/192x192/8786a6/FFFFFF?text=AW&font=inter'; this.onerror=null;">
+                            </div>
+                            <h3 class="text-xl font-bold text-cf-dark-blue group-hover:text-cf-light-blue transition-colors mb-2">Akanksha Wakhare</h3>
+                            <p class="text-cf-mid-blue font-medium">Co-Founder & CEO</p>
+                        </a>
+                    </div>
+                    
+                    <!-- Team Member -->
+                    <div class="text-center">
+                        <a href="https://www.linkedin.com/in/niraj-tadsare-a62427162/" target="_blank" rel="noopener noreferrer" class="block group">
+                            <div class="relative mb-6 mx-auto w-52 h-52">
+                                <img src="Niraj.jpg" 
+                                     alt="Niraj Tadsare" 
+                                     class="w-full h-full rounded-full object-cover shadow-xl transition-all duration-300 group-hover:scale-105 group-hover:shadow-2xl border-4 border-white"
+                                     onerror="this.src='https://placehold.co/192x192/8786a6/FFFFFF?text=NT&font=inter'; this.onerror=null;">
+                            </div>
+                            <h3 class="text-xl font-bold text-cf-dark-blue group-hover:text-cf-light-blue transition-colors mb-2">Niraj Tadsare</h3>
+                            <p class="text-cf-mid-blue font-medium">Co-Founder & CSO</p>
+                        </a>
+                    </div>
+                    
+                    <!-- Team Member -->
+                    <div class="text-center">
+                        <a href="https://www.linkedin.com/in/marcus-hartmann-57331b1b/" target="_blank" rel="noopener noreferrer" class="block group">
+                            <div class="relative mb-6 mx-auto w-52 h-52">
+                                <img src="Marcus-Hartmann.webp" 
+                                     alt="Dr. Marcus Hartmann" 
+                                     class="w-full h-full rounded-full object-cover shadow-xl transition-all duration-300 group-hover:scale-105 group-hover:shadow-2xl border-4 border-white"
+                                     onerror="this.src='https://placehold.co/192x192/8786a6/FFFFFF?text=MH&font=inter'; this.onerror=null;">
+                            </div>
+                            <h3 class="text-xl font-bold text-cf-dark-blue group-hover:text-cf-light-blue transition-colors mb-2">Dr. Marcus Hartmann</h3>
+                            <p class="text-cf-mid-blue font-medium">Scientific Advisor</p>
+                        </a>
+                    </div>
+                    
+                    <!-- Team Member -->
+                    <div class="text-center">
+                        <a href="https://www.linkedin.com/in/lalithkishore/" target="_blank" rel="noopener noreferrer" class="block group">
+                            <div class="relative mb-6 mx-auto w-52 h-52">
+                                <img src="Lalit.jpg" 
+                                     alt="Lalith Kishore" 
+                                     class="w-full h-full rounded-full object-cover shadow-xl transition-all duration-300 group-hover:scale-105 group-hover:shadow-2xl border-4 border-white"
+                                     onerror="this.src='https://placehold.co/192x192/8786a6/FFFFFF?text=LK&font=inter'; this.onerror=null;">
+                            </div>
+                            <h3 class="text-xl font-bold text-cf-dark-blue group-hover:text-cf-light-blue transition-colors mb-2">Lalith Kishore</h3>
+                            <p class="text-cf-mid-blue font-medium">Business Advisor</p>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sustainability Goals Section -->
+        <section id="sdg" class="py-20 md:py-28 bg-white">
+            <div class="container mx-auto px-6">
+                <h2 class="text-4xl md:text-5xl font-bold text-center text-cf-dark-blue mb-6">
+                    Contributing to UN Sustainable Development Goals
+                </h2>
+                <p class="text-center text-xl text-gray-600 mb-16 max-w-3xl mx-auto">
+                    Our work aligns with multiple UN Sustainable Development Goals, driving positive global impact through innovation in biomanufacturing
+                </p>
+                
+                <div class="max-w-6xl mx-auto">
+                    <!-- SDG Cards Grid -->
+                    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6 mb-12">
+                        <!-- SDG 3: Good Health and Well-being -->
+                        <div class="transition-all duration-300 hover:scale-110 hover:shadow-2xl">
+                            <img src="https://sdgs.un.org/sites/default/files/goals/E_SDG_Icons-03.jpg" 
+                                 alt="SDG 3: Good Health and Well-Being" 
+                                 class="w-full h-auto rounded-lg shadow-lg"
+                                 onerror="this.src='https://via.placeholder.com/200x200/4C9F38/FFFFFF?text=SDG+3';">
+                        </div>
+
+                        <!-- SDG 8: Decent Work and Economic Growth -->
+                        <div class="transition-all duration-300 hover:scale-110 hover:shadow-2xl">
+                            <img src="https://sdgs.un.org/sites/default/files/goals/E_SDG_Icons-08.jpg" 
+                                 alt="SDG 8: Decent Work and Economic Growth" 
+                                 class="w-full h-auto rounded-lg shadow-lg"
+                                 onerror="this.src='https://via.placeholder.com/200x200/A21942/FFFFFF?text=SDG+8';">
+                        </div>
+
+                        <!-- SDG 9: Industry, Innovation and Infrastructure -->
+                        <div class="transition-all duration-300 hover:scale-110 hover:shadow-2xl">
+                            <img src="https://sdgs.un.org/sites/default/files/goals/E_SDG_Icons-09.jpg" 
+                                 alt="SDG 9: Industry, Innovation and Infrastructure" 
+                                 class="w-full h-auto rounded-lg shadow-lg"
+                                 onerror="this.src='https://via.placeholder.com/200x200/FD6925/FFFFFF?text=SDG+9';">
+                        </div>
+
+                        <!-- SDG 12: Responsible Consumption and Production -->
+                        <div class="transition-all duration-300 hover:scale-110 hover:shadow-2xl">
+                            <img src="https://sdgs.un.org/sites/default/files/goals/E_SDG_Icons-12.jpg" 
+                                 alt="SDG 12: Responsible Consumption and Production" 
+                                 class="w-full h-auto rounded-lg shadow-lg"
+                                 onerror="this.src='https://via.placeholder.com/200x200/BF8B2E/FFFFFF?text=SDG+12';">
+                        </div>
+
+                        <!-- SDG 13: Climate Action -->
+                        <div class="transition-all duration-300 hover:scale-110 hover:shadow-2xl">
+                            <img src="https://sdgs.un.org/sites/default/files/goals/E_SDG_Icons-13.jpg" 
+                                 alt="SDG 13: Climate Action" 
+                                 class="w-full h-auto rounded-lg shadow-lg"
+                                 onerror="this.src='https://via.placeholder.com/200x200/3F7E44/FFFFFF?text=SDG+13';">
+                        </div>
+
+                        <!-- SDG 17: Partnerships for the Goals -->
+                        <div class="transition-all duration-300 hover:scale-110 hover:shadow-2xl">
+                            <img src="https://sdgs.un.org/sites/default/files/goals/E_SDG_Icons-17.jpg" 
+                                 alt="SDG 17: Partnerships for the Goals" 
+                                 class="w-full h-auto rounded-lg shadow-lg"
+                                 onerror="this.src='https://via.placeholder.com/200x200/19486A/FFFFFF?text=SDG+17';">
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="py-20 md:py-28 bg-white">
+            <div class="container mx-auto px-6">
+                <h2 class="text-4xl md:text-5xl font-bold text-center text-cf-dark-blue mb-20">
+                    Get in Touch
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-6xl mx-auto">
+                    <!-- Forge Labs Address -->
+                    <div class="bg-gradient-to-br from-white to-gray-50 p-10 rounded-3xl shadow-2xl border border-cf-light-blue/30 transition-all duration-300 hover:shadow-3xl hover:scale-[1.02]">
+                        <div class="flex items-center mb-6">
+                            <div class="w-12 h-12 bg-cf-light-blue rounded-full flex items-center justify-center mr-4">
+                                <span class="text-white text-xl font-bold">🔬</span>
+                            </div>
+                            <h3 class="text-2xl font-bold text-cf-dark-blue">
+                                Forge Labs
+                            </h3>
+                        </div>
+                        <address class="not-italic text-gray-700 space-y-3 mb-8 text-base leading-relaxed">
+                            <p>2nd Floor, C-CAMP, Bellary Rd, Post, Bengaluru, Karnataka - 560097</p>
+                        </address>
+                        <div class="pt-6 border-t border-gray-200 space-y-3">
+                            <p class="text-gray-700 flex items-center">
+                                <span class="font-semibold mr-2">✉️ Email:</span> 
+                                <a href="mailto:akanksha.wakhare@cellforge.in" class="text-cf-mid-blue hover:text-cf-light-blue transition-colors">akanksha.wakhare@cellforge.in</a>
+                            </p>
+                            <p class="text-gray-700 flex items-center">
+                                <span class="font-semibold mr-2">📞 Phone:</span> 
+                                <a href="tel:+918767380223" class="text-cf-mid-blue hover:text-cf-light-blue transition-colors">+91-8767380223</a>
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <!-- Corporate Address -->
+                    <div class="bg-gradient-to-br from-white to-gray-50 p-10 rounded-3xl shadow-2xl border border-cf-light-blue/30 transition-all duration-300 hover:shadow-3xl hover:scale-[1.02]">
+                        <div class="flex items-center mb-6">
+                            <div class="w-12 h-12 bg-cf-mid-blue rounded-full flex items-center justify-center mr-4">
+                                <span class="text-white text-xl font-bold">🏢</span>
+                            </div>
+                            <h3 class="text-2xl font-bold text-cf-dark-blue">
+                                Corporate Address
+                            </h3>
+                        </div>
+                        <address class="not-italic text-gray-700 space-y-3 text-base leading-relaxed">
+                            <p>198, 2nd Floor, CMH Road, Near Shanti Sagara Hotel, Indiranagar, Bangalore, Karnataka - 560038</p>
+                        </address>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Scroll to Top Button -->
+    <button id="scroll-top" class="fixed bottom-8 right-8 bg-cf-mid-blue text-white p-4 rounded-full shadow-2xl opacity-0 pointer-events-none transition-all duration-300 hover:bg-cf-dark-blue hover:scale-110 z-40">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
+        </svg>
+    </button>
 
     <!-- Footer -->
-    <footer class="bg-slate-800 text-white">
-        <div class="container mx-auto px-6 py-8">
-            <div class="flex flex-col md:flex-row justify-between items-center">
-                <p class="text-center md:text-left text-slate-400">&copy; 2025 CellForge. All Rights Reserved.</p>
-                <div class="flex mt-4 md:mt-0 space-x-6">
-                    <a href="#" class="text-slate-400 hover:text-white">Privacy Policy</a>
-                    <a href="#" class="text-slate-400 hover:text-white">Terms of Service</a>
+    <footer class="bg-cf-dark-blue py-12">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+                <!-- Company Info -->
+                <div>
+                    <img src="CellForge_Logo_Transparent.png" 
+                         alt="Cell Forge Logo" 
+                         class="h-12 mb-4 brightness-0 invert"
+                         onerror="this.src='https://placehold.co/200x60/002266/ffffff?text=CellForge&font=inter'; this.onerror=null;">
+                    <p class="text-cf-gray-purple text-sm leading-relaxed">
+                        Next-gen biomanufacturing through precision fermentation.
+                    </p>
                 </div>
+                
+                <!-- Quick Links -->
+                <div>
+                    <h3 class="text-white font-semibold mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#home" class="text-cf-gray-purple hover:text-cf-light-blue transition-colors text-sm">Home</a></li>
+                        <li><a href="#what-we-do" class="text-cf-gray-purple hover:text-cf-light-blue transition-colors text-sm">What We Do</a></li>
+                        <li><a href="#about" class="text-cf-gray-purple hover:text-cf-light-blue transition-colors text-sm">About Us</a></li>
+                        <li><a href="#technology" class="text-cf-gray-purple hover:text-cf-light-blue transition-colors text-sm">Technology</a></li>
+                        <li><a href="#usp" class="text-cf-gray-purple hover:text-cf-light-blue transition-colors text-sm">USP</a></li>
+                        <li><a href="#products" class="text-cf-gray-purple hover:text-cf-light-blue transition-colors text-sm">Products</a></li>
+                        <li><a href="#services" class="text-cf-gray-purple hover:text-cf-light-blue transition-colors text-sm">Services</a></li>
+                        <li><a href="#sdg" class="text-cf-gray-purple hover:text-cf-light-blue transition-colors text-sm">SDG</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Contact Info -->
+                <div>
+                    <h3 class="text-white font-semibold mb-4">Contact</h3>
+                    <ul class="space-y-2 text-sm">
+                        <li class="text-cf-gray-purple">
+                            <a href="mailto:akanksha.wakhare@cellforge.in" class="hover:text-cf-light-blue transition-colors">
+                                akanksha.wakhare@cellforge.in
+                            </a>
+                        </li>
+                        <li class="text-cf-gray-purple">
+                            <a href="tel:+918767380223" class="hover:text-cf-light-blue transition-colors">
+                                +91-8767380223
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-cf-mid-blue pt-6 text-center">
+                <p class="text-cf-gray-purple text-sm">
+                    © 2025 Cell Forge Technologies Pvt. Ltd. All Rights Reserved.
+                </p>
             </div>
         </div>
     </footer>
 
+    <!-- Mobile Menu Script -->
     <script>
-        // Mobile menu toggle
-        const mobileMenuButton = document.getElementById('mobile-menu-button');
-        const mobileMenu = document.getElementById('mobile-menu');
-        mobileMenuButton.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-        });
+        document.addEventListener('DOMContentLoaded', () => {
+            const menuBtn = document.getElementById('menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const navLinks = mobileMenu.querySelectorAll('a');
+            const scrollTopBtn = document.getElementById('scroll-top');
 
-        // Smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                // Close mobile menu on link click
-                if (!mobileMenu.classList.contains('hidden')) {
-                    mobileMenu.classList.add('hidden');
+            const toggleMenu = () => {
+                menuBtn.classList.toggle('open');
+                mobileMenu.classList.toggle('hidden');
+                document.body.classList.toggle('overflow-hidden'); // Prevent scrolling when menu is open
+            };
+
+            menuBtn.addEventListener('click', toggleMenu);
+
+            // Close menu when a link is clicked
+            navLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    if (!mobileMenu.classList.contains('hidden')) {
+                        toggleMenu();
+                    }
+                });
+            });
+
+            // Scroll to top button functionality
+            window.addEventListener('scroll', () => {
+                if (window.pageYOffset > 300) {
+                    scrollTopBtn.classList.remove('opacity-0', 'pointer-events-none');
+                    scrollTopBtn.classList.add('opacity-100', 'pointer-events-auto');
+                } else {
+                    scrollTopBtn.classList.remove('opacity-100', 'pointer-events-auto');
+                    scrollTopBtn.classList.add('opacity-0', 'pointer-events-none');
                 }
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
+            });
+
+            scrollTopBtn.addEventListener('click', () => {
+                window.scrollTo({
+                    top: 0,
                     behavior: 'smooth'
                 });
             });
+
+            // Mission section - animated reagents
+            const animatedItems = document.querySelectorAll('.mission-animated-item');
+            let currentAnimatedIndex = 0;
+
+            function showNextAnimatedItem() {
+                // Remove active class from all items
+                animatedItems.forEach(item => item.classList.remove('active'));
+                
+                // Add active class to current item
+                if (animatedItems[currentAnimatedIndex]) {
+                    animatedItems[currentAnimatedIndex].classList.add('active');
+                }
+                
+                // Move to next item
+                currentAnimatedIndex = (currentAnimatedIndex + 1) % animatedItems.length;
+            }
+
+            // Start the animation if there are animated items
+            if (animatedItems.length > 0) {
+                showNextAnimatedItem();
+                // Continue cycling every 2 seconds
+                setInterval(showNextAnimatedItem, 2000);
+            }
+
+            // Vertical carousel for Why TetraFORGE section
+            const featureCards = document.querySelectorAll('.feature-card');
+            let currentFeatureIndex = 0;
+            const totalFeatures = featureCards.length;
+
+            function updateCarousel() {
+                featureCards.forEach((card, index) => {
+                    card.classList.remove('active', 'prev', 'next', 'far-prev', 'far-next');
+                    
+                    const diff = index - currentFeatureIndex;
+                    
+                    if (diff === 0) {
+                        card.classList.add('active');
+                    } else if (diff === -1 || diff === totalFeatures - 1) {
+                        card.classList.add('prev');
+                    } else if (diff === 1 || diff === -(totalFeatures - 1)) {
+                        card.classList.add('next');
+                    } else if (diff === -2 || diff === totalFeatures - 2) {
+                        card.classList.add('far-prev');
+                    } else if (diff === 2 || diff === -(totalFeatures - 2)) {
+                        card.classList.add('far-next');
+                    }
+                });
+            }
+
+            function rotateCarousel() {
+                currentFeatureIndex = (currentFeatureIndex + 1) % totalFeatures;
+                updateCarousel();
+            }
+
+            // Initial setup
+            updateCarousel();
+
+            // Auto-rotate every 3 seconds
+            setInterval(rotateCarousel, 3000);
         });
     </script>
 </body>
 </html>
+
+
